@@ -13,5 +13,5 @@ urlpatterns = [
     path('agents', views.get_agents), #ruta para obtener todos los agentes
     path('agent/<int:agent_id>', views.get_agent), #ruta para obtener un agente
     path('airports', views.get_airports), #ruta para obtener todos los aeropuertos
-    path('airport/<int:airport_id>', views.get_airports), #ruta para obtener un aeropuerto
+    path('airport/<int:airport_id>', views.get_airport), #ruta para obtener un aeropuerto
 ]
