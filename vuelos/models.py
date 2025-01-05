@@ -8,7 +8,7 @@ class Itinerary(models.Model):
     agent = models.ForeignKey('Agent', on_delete=models.CASCADE)
     legs = models.ManyToManyField('Leg', related_name='legs') #relacion n-n con la tabla Leg
     def __str__(self):
-        return f"{self.price} - {self.agent} ({self.agent_rating}★)" # resultado: £95 - Agencia 1 (4.5★)
+        return f"£{self.price} - {self.agent} ({self.agent.rating}★)" # resultado: £95 - Agencia 1 (4.5★)
 
 class Leg(models.Model):
     cod = models.CharField(max_length=5, null=True, default=None)
@@ -21,7 +21,7 @@ class Leg(models.Model):
     duration_mins = models.IntegerField()
     
     def __str__(self):
-        return f"{self.departure_airport} --> {self.arrival_airport} ({self.airline_name})" # resultado: LHR --> JFK (British Airways)
+        return f"{self.departure_airport} --> {self.arrival_airport} ({self.airline.name})" # resultado: LHR --> JFK (British Airways)
 
 class Airline(models.Model):
     name = models.CharField(max_length=100)
