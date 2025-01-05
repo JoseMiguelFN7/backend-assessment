@@ -4,18 +4,18 @@ from django.db import models
 
 class Itinerary(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    id_agent = models.ForeignKey('Agents', on_delete=models.CASCADE)
+    id_agent = models.ForeignKey('Agent', on_delete=models.CASCADE)
     legs = models.ManyToManyField('Leg', related_name='legs') #relacion n-n con la tabla Leg
     def __str__(self):
         return f"{self.price} - {self.agent} ({self.agent_rating}★)" # resultado: £95 - Agencia 1 (4.5★)
 
-class Leg(models.Model(models.Model)):
-    departure_airport = models.ForeignKey('Airports', on_delete=models.CASCADE)
-    arrival_airport = models.ForeignKey('Airports', on_delete=models.CASCADE)
+class Leg(models.Model):
+    departure_airport = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='departure_airport')
+    arrival_airport = models.ForeignKey('Airport', on_delete=models.CASCADE, related_name='arrival_airport')
     departure_time = models.DateTimeField()
     arrival_time = models.DateTimeField()
     stops = models.IntegerField()
-    airline_id = models.ForeignKey('Airlines', on_delete=models.CASCADE)
+    airline_id = models.ForeignKey('Airline', on_delete=models.CASCADE)
     duration_mins = models.IntegerField()
     
     def __str__(self):
